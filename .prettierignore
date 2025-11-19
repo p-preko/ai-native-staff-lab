@@ -1,0 +1,16 @@
+node_modules
+.yarn
+.pnp.*
+dist
+build
+coverage
+.next
+out
+.expo
+.expo-shared
+.turbo
+.eslintcache
+*.tsbuildinfo
+*.log
+.DS_Store
+

@@ -1,0 +1,28 @@
+{
+  "name": "@staff-lab/core",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --check src",
+    "format:fix": "prettier --write src",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "test": "jest",
+    "test:config": "yarn lint && yarn typecheck && yarn format",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@staff-lab/config": "workspace:*"
+  }
+}
