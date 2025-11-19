@@ -140,6 +140,3 @@ fastlane/test_output
 **/android/*.iml
 **/android/.cxx/
 **/android/.externalNativeBuild/
-
-# VSCode
-.vscode/

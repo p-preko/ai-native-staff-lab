@@ -1,4 +1,3 @@
-// This file should pass all checks - properly formatted, typed, and linted
 export function add(a: number, b: number): number {
   return a + b;
 }
