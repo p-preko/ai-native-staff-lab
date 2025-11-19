@@ -1,0 +1,16 @@
+{
+  "extends": "./packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@staff-lab/core": ["./packages/core/src"],
+      "@staff-lab/ai": ["./packages/ai/src"],
+      "@staff-lab/config/*": ["./packages/config/*"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/ai" },
+    { "path": "./packages/config" }
+  ]
+}

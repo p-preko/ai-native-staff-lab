@@ -1,0 +1,30 @@
+{
+  "name": "@staff-lab/config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./eslint.config.mjs": "./eslint.config.mjs",
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./jest.config.base.mjs": "./jest.config.base.mjs"
+  },
+  "files": [
+    "tsconfig.base.json",
+    "eslint.config.mjs",
+    "jest.config.base.mjs"
+  ],
+  "devDependencies": {
+    "@eslint/config-helpers": "^0.1.0",
+    "@eslint/js": "^9.39.1",
+    "@types/jest": "^29.5.14",
+    "@vercel/style-guide": "^6.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^16.5.0",
+    "jest": "^29.7.0",
+    "jiti": "^2.6.1",
+    "prettier": "3.6.2",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0"
+  }
+}

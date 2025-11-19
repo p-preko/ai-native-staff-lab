@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+.yarn
+.pnp.*
+
+# Build outputs
+dist
+build
+coverage
+.next
+out
+
+# Expo
+.expo
+.expo-shared
+
+# Caches
+.turbo
+.eslintcache
+*.tsbuildinfo
+
+# Misc
+*.log
+.DS_Store
+
