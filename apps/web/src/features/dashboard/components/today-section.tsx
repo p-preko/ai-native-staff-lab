@@ -21,7 +21,10 @@ export function TodaySection({
           <div key={project.id} className="space-y-3">
             <ProjectCard project={project} variant="active" />
             {project.status === 'in-progress' && (
-              <OpenWorkspaceButton projectId={project.id} />
+              <OpenWorkspaceButton
+                projectId={project.id}
+                projectName={project.name}
+              />
             )}
           </div>
         ))}

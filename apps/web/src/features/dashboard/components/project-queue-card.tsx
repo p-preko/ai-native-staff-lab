@@ -10,6 +10,7 @@ interface ProjectQueueCardProps {
 
 export function ProjectQueueCard({ project }: ProjectQueueCardProps) {
   const actionLabel = project.status === 'in-progress' ? 'Resume' : 'Start';
+  const linkLabel = `${actionLabel} ${project.name}`;
 
   return (
     <Card className="w-full transition-all hover:shadow-lg">
@@ -48,7 +49,9 @@ export function ProjectQueueCard({ project }: ProjectQueueCardProps) {
         </div>
 
         <Button className="w-full" size="lg" asChild>
-          <Link href={`/workspace/${project.id}`}>{actionLabel}</Link>
+          <Link href={`/workspace/${project.id}`} aria-label={linkLabel}>
+            {linkLabel}
+          </Link>
         </Button>
       </CardContent>
     </Card>

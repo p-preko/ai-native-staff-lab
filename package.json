@@ -16,7 +16,8 @@
     "test:watch": "yarn workspaces foreach -A --parallel run test:watch",
     "typecheck": "yarn workspaces foreach -A --parallel run typecheck",
     "web:build": "yarn workspace @staff-lab/web build",
-    "web:dev": "yarn workspace @staff-lab/web dev"
+    "web:dev": "yarn workspace @staff-lab/web dev",
+    "web:start": "yarn workspace @staff-lab/web start"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
