@@ -7,7 +7,7 @@ Monorepo for AI-powered applications.
 ```
 ├── apps/
 │   ├── mobile/    # Expo app
-│   └── web/       # Next.js app
+│   └── web/       # Next.js 16 app
 ├── packages/
 │   ├── config/    # Shared configs
 │   ├── core/      # Core domain logic

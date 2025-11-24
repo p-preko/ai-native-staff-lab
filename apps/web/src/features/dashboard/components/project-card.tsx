@@ -70,7 +70,11 @@ export function ProjectCard({ project, variant = 'queue' }: ProjectCardProps) {
                 <span>Progress</span>
                 <span className="font-medium">{project.progress}%</span>
               </div>
-              <Progress value={project.progress} className="h-3" />
+              <Progress
+                value={project.progress}
+                className="h-3"
+                aria-label={`${project.name} progress: ${project.progress}%`}
+              />
             </div>
             {project.nextTask && (
               <div className="pt-2 border-t">
