@@ -1,8 +1,9 @@
-export default function ScenariosPage() {
-  return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold">Scenarios</h1>
-      <p className="text-muted-foreground mt-4">Coming soon...</p>
-    </div>
-  );
+import { ScenariosPage } from '@/features/scenarios';
+
+interface PageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export default function Scenarios({ searchParams }: PageProps) {
+  return <ScenariosPage searchParams={searchParams} />;
 }
