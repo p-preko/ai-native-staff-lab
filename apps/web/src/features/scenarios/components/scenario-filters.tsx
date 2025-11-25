@@ -5,6 +5,7 @@ import { SkillTag, DifficultyLevel } from '@/types/scenario';
 import { ALL_SKILLS, ALL_DIFFICULTIES } from '../lib/constants';
 import { useScenarioFilters } from '../hooks/use-scenario-filters';
 import { Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ScenarioFiltersProps {
   selectedSkills: SkillTag[];
@@ -119,19 +120,29 @@ export function ScenarioFilters({
           }}
         >
           <div
-            className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${
-              showUnfinished ? 'bg-primary' : 'bg-input'
-            }`}
+            className={cn(
+              'w-11 h-6 rounded-full transition-colors flex items-center px-0.5',
+              {
+                'bg-primary': showUnfinished,
+                'bg-input': !showUnfinished,
+              },
+            )}
           >
             {isUnfinishedPending ? (
               <Loader2
-                className={`h-4 w-4 animate-spin ${showUnfinished ? 'text-primary-foreground translate-x-5' : 'text-muted-foreground'}`}
+                className={cn('h-4 w-4 animate-spin', {
+                  'text-primary-foreground translate-x-5': showUnfinished,
+                  'text-muted-foreground': !showUnfinished,
+                })}
               />
             ) : (
               <div
-                className={`w-5 h-5 rounded-full bg-background transition-transform ${
-                  showUnfinished ? 'translate-x-5' : ''
-                }`}
+                className={cn(
+                  'w-5 h-5 rounded-full bg-background transition-transform',
+                  {
+                    'translate-x-5': showUnfinished,
+                  },
+                )}
               />
             )}
           </div>
