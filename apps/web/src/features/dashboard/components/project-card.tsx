@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Project } from '@/types/project';
-import { cn } from '@/lib/utils';
 import { InteractiveItem } from '@/components/ui/interactive-item';
 
 interface ProjectCardProps {

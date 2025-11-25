@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { FileText, Calendar } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { InteractiveItem } from '@/components/ui/interactive-item';
 
 interface WorkspaceProjectCardProps {

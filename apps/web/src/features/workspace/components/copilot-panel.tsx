@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send } from 'lucide-react';
@@ -17,9 +16,9 @@ export function CopilotPanel() {
         <div className="space-y-4">
           <div className="flex gap-3">
             <div className="bg-primary/10 p-3 rounded-lg text-sm max-w-[85%]">
-              Hello! I'm your Staff Partner. I can help you draft this document,
-              critique your strategy, or brainstorm ideas. How can I help with
-              this project?
+              Hello! I&apos;m your Staff Partner. I can help you draft this
+              document, critique your strategy, or brainstorm ideas. How can I
+              help with this project?
             </div>
           </div>
         </div>
