@@ -17,7 +17,11 @@ export function useScenarioFilters({
 }: UseScenarioFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+
+  // Separate transitions for each filter type
+  const [isSkillsPending, startSkillsTransition] = useTransition();
+  const [isDifficultyPending, startDifficultyTransition] = useTransition();
+  const [isUnfinishedPending, startUnfinishedTransition] = useTransition();
 
   // Local state for immediate UI updates
   const [skills, setSkills] = useState<SkillTag[]>(initialSkills);
@@ -25,11 +29,14 @@ export function useScenarioFilters({
     useState<DifficultyLevel[]>(initialDifficulty);
   const [showUnfinished, setShowUnfinished] = useState(initialShowUnfinished);
 
-  const updateParams = (updates: {
-    skills?: SkillTag[];
-    difficulty?: DifficultyLevel[];
-    unfinished?: boolean;
-  }) => {
+  const applyUpdate = (
+    updates: {
+      skills?: SkillTag[];
+      difficulty?: DifficultyLevel[];
+      unfinished?: boolean;
+    },
+    startTransition: React.TransitionStartFunction,
+  ) => {
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
 
@@ -69,7 +76,7 @@ export function useScenarioFilters({
       ? skills.filter((s) => s !== skill)
       : [...skills, skill];
     setSkills(nextSkills);
-    updateParams({ skills: nextSkills });
+    applyUpdate({ skills: nextSkills }, startSkillsTransition);
   };
 
   const toggleDifficulty = (level: DifficultyLevel) => {
@@ -77,20 +84,22 @@ export function useScenarioFilters({
       ? difficulty.filter((d) => d !== level)
       : [...difficulty, level];
     setDifficulty(nextDifficulty);
-    updateParams({ difficulty: nextDifficulty });
+    applyUpdate({ difficulty: nextDifficulty }, startDifficultyTransition);
   };
 
   const toggleUnfinished = () => {
     const next = !showUnfinished;
     setShowUnfinished(next);
-    updateParams({ unfinished: next });
+    applyUpdate({ unfinished: next }, startUnfinishedTransition);
   };
 
   return {
     skills,
     difficulty,
     showUnfinished,
-    isPending,
+    isSkillsPending,
+    isDifficultyPending,
+    isUnfinishedPending,
     toggleSkill,
     toggleDifficulty,
     toggleUnfinished,

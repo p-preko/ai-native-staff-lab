@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { SkillTag, DifficultyLevel } from '@/types/scenario';
 import { ALL_SKILLS, ALL_DIFFICULTIES } from '../lib/constants';
 import { useScenarioFilters } from '../hooks/use-scenario-filters';
+import { Loader2 } from 'lucide-react';
 
 interface ScenarioFiltersProps {
   selectedSkills: SkillTag[];
@@ -20,7 +21,9 @@ export function ScenarioFilters({
     skills,
     difficulty,
     showUnfinished,
-    isPending,
+    isSkillsPending,
+    isDifficultyPending,
+    isUnfinishedPending,
     toggleSkill,
     toggleDifficulty,
     toggleUnfinished,
@@ -31,12 +34,15 @@ export function ScenarioFilters({
   });
 
   return (
-    <div
-      className={`space-y-6 pb-6 border-b transition-opacity duration-200 ${isPending ? 'opacity-60 pointer-events-none' : ''}`}
-    >
+    <div className="space-y-6 pb-6 border-b">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-foreground">Skills</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-foreground">Skills</h2>
+            {isSkillsPending && (
+              <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+            )}
+          </div>
           <div className="flex flex-wrap gap-2">
             {ALL_SKILLS.map((skill) => (
               <Badge
@@ -61,7 +67,14 @@ export function ScenarioFilters({
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-foreground">Difficulty</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-foreground">
+              Difficulty
+            </h2>
+            {isDifficultyPending && (
+              <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+            )}
+          </div>
           <div className="flex flex-wrap gap-2">
             {ALL_DIFFICULTIES.map((level) => (
               <Badge
@@ -106,19 +119,27 @@ export function ScenarioFilters({
           }}
         >
           <div
-            className={`w-11 h-6 rounded-full transition-colors ${
+            className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 ${
               showUnfinished ? 'bg-primary' : 'bg-input'
             }`}
           >
-            <div
-              className={`w-5 h-5 rounded-full bg-background transition-transform ${
-                showUnfinished ? 'translate-x-5' : 'translate-x-0.5'
-              } translate-y-0.5`}
-            />
+            {isUnfinishedPending ? (
+              <Loader2
+                className={`h-4 w-4 animate-spin ${showUnfinished ? 'text-primary-foreground translate-x-5' : 'text-muted-foreground'}`}
+              />
+            ) : (
+              <div
+                className={`w-5 h-5 rounded-full bg-background transition-transform ${
+                  showUnfinished ? 'translate-x-5' : ''
+                }`}
+              />
+            )}
           </div>
-          <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
-            Show only unfinished
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+              Show only unfinished
+            </span>
+          </div>
         </div>
       </div>
     </div>

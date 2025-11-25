@@ -14,25 +14,30 @@ export function useWorkspaceFilters({
 }: UseWorkspaceFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+  const [isSearchPending, startSearchTransition] = useTransition();
+  const [isTabPending, startTabTransition] = useTransition();
 
   const [searchValue, setSearchValue] = useState(initialSearch);
   const [activeTab, setActiveTab] = useState(initialStatus || 'active');
 
-  const updateParams = (updates: { search?: string; status?: string }) => {
-    startTransition(() => {
+  const updateSearch = (term: string) => {
+    startSearchTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
+      if (term) params.set('search', term);
+      else params.delete('search');
 
-      if (updates.search !== undefined) {
-        if (updates.search) params.set('search', updates.search);
-        else params.delete('search');
-      }
+      const queryString = params.toString();
+      router.replace(queryString ? `/workspace?${queryString}` : '/workspace', {
+        scroll: false,
+      });
+    });
+  };
 
-      if (updates.status !== undefined) {
-        if (updates.status && updates.status !== 'all')
-          params.set('status', updates.status);
-        else params.delete('status');
-      }
+  const updateTab = (status: string) => {
+    startTabTransition(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (status && status !== 'all') params.set('status', status);
+      else params.delete('status');
 
       const queryString = params.toString();
       router.replace(queryString ? `/workspace?${queryString}` : '/workspace', {
@@ -43,18 +48,19 @@ export function useWorkspaceFilters({
 
   const handleSearch = (term: string) => {
     setSearchValue(term);
-    updateParams({ search: term });
+    updateSearch(term);
   };
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    updateParams({ status: value });
+    updateTab(value);
   };
 
   return {
     searchValue,
     activeTab,
-    isPending,
+    isSearchPending,
+    isTabPending,
     handleSearch,
     handleTabChange,
   };
