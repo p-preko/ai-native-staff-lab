@@ -26,7 +26,6 @@ export function createFilterViewModel(
   selectedDifficulty: DifficultyLevel[],
   showOnlyUnfinished: boolean,
 ): FilterViewModel {
-  // Helper to generate skill items
   const skills = ALL_SKILLS.map((skill) => {
     const isSelected = selectedSkills.includes(skill);
     const newSkills = isSelected
@@ -44,13 +43,12 @@ export function createFilterViewModel(
 
     return {
       value: skill,
-      label: skill, // Can map to display name if needed
+      label: skill,
       active: isSelected,
       href,
     };
   });
 
-  // Helper to generate difficulty items
   const difficulty = ALL_DIFFICULTIES.map((diff) => {
     const isSelected = selectedDifficulty.includes(diff);
     const newDifficulty = isSelected
@@ -72,7 +70,6 @@ export function createFilterViewModel(
     };
   });
 
-  // Unfinished toggle
   const unfinishedHref = buildFilterUrl(currentParams, {
     skills: selectedSkills.length > 0 ? selectedSkills.join(',') : undefined,
     difficulty:

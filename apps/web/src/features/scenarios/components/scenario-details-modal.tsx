@@ -14,7 +14,6 @@ interface ScenarioDetailsModalProps {
   children: ReactNode;
 }
 
-// Keep in sync with .data-[state=closed]:slide-out-right duration
 const RADIX_SLIDE_DURATION = 300;
 
 export function ScenarioDetailsModal({ children }: ScenarioDetailsModalProps) {

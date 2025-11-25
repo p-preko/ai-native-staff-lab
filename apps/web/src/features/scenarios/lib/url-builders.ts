@@ -1,15 +1,5 @@
-/**
- * Domain-specific URL builders for scenarios
- *
- * Pure functions: detailed control over URL generation.
- * No side effects, no headers, just pure logic.
- */
-
 type SearchParamsInput = Record<string, string | string[] | undefined>;
 
-/**
- * Helper to convert search params to URLSearchParams
- */
 function toURLSearchParams(params: SearchParamsInput): URLSearchParams {
   const urlParams = new URLSearchParams();
 
@@ -26,10 +16,6 @@ function toURLSearchParams(params: SearchParamsInput): URLSearchParams {
   return urlParams;
 }
 
-/**
- * Build URL for filter changes (skills, difficulty, unfinished)
- * Uses explicit current params to ensure consistency.
- */
 export function buildFilterUrl(
   currentParams: SearchParamsInput,
   update: {
@@ -40,7 +26,6 @@ export function buildFilterUrl(
 ): string {
   const params = toURLSearchParams(currentParams);
 
-  // Apply filter updates
   if (update.skills?.trim()) {
     params.set('skills', update.skills.trim());
   } else {
