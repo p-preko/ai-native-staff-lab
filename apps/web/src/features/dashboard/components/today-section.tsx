@@ -1,6 +1,5 @@
 import { ProjectCard } from './project-card';
 import { Badge } from '@/components/ui/badge';
-import { OpenWorkspaceButton } from './open-workspace-button';
 import { Project } from '@/types/project';
 
 interface TodaySectionProps {
@@ -20,12 +19,6 @@ export function TodaySection({
         {activeProjects.map((project) => (
           <div key={project.id} className="space-y-3">
             <ProjectCard project={project} variant="active" />
-            {project.status === 'in-progress' && (
-              <OpenWorkspaceButton
-                projectId={project.id}
-                projectName={project.name}
-              />
-            )}
           </div>
         ))}
 
