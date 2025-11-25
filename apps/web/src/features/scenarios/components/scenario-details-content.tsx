@@ -5,11 +5,6 @@ import { Clock, CheckCircle2, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import {
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
 
 interface ScenarioDetailsContentProps {
   scenario: Scenario;
@@ -22,13 +17,6 @@ export function ScenarioDetailsContent({
 
   return (
     <div className="flex flex-col h-full">
-      <SheetHeader className="sr-only">
-        <SheetTitle>{scenario.title}</SheetTitle>
-        <SheetDescription>
-          Scenario details for {scenario.title}
-        </SheetDescription>
-      </SheetHeader>
-
       <div className="px-6 pt-6 space-y-4">
         <h2 className="text-2xl font-bold leading-tight">{scenario.title}</h2>
 

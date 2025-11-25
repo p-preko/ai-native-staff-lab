@@ -4,19 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Scenario } from '@/types/scenario';
 import { Clock, CheckCircle2, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
-import {
-  buildScenarioUrl,
-  type ScenariosSearchParams,
-} from '../lib/validation';
 
 interface ScenarioCardProps {
   scenario: Scenario;
-  currentParams: ScenariosSearchParams;
 }
 
-export function ScenarioCard({ scenario, currentParams }: ScenarioCardProps) {
+export function ScenarioCard({ scenario }: ScenarioCardProps) {
   const duration = `${scenario.durationMin}-${scenario.durationMax} min`;
-  const detailsUrl = buildScenarioUrl(currentParams, { details: scenario.id });
+  const detailsUrl = `/scenarios/${scenario.id}`;
 
   return (
     <Card className="w-full transition-all hover:shadow-lg flex flex-col h-full">

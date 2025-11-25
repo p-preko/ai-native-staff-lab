@@ -1,4 +1,4 @@
-import { Scenario } from '@/types/scenario';
+import { Scenario, ScenarioFilters } from '@/types/scenario';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -233,22 +233,19 @@ const MOCK_SCENARIOS: Scenario[] = [
 ];
 
 export async function getScenarios(): Promise<Scenario[]> {
-  await delay(150);
+  await delay(1500);
   return MOCK_SCENARIOS;
 }
 
 export async function getScenarioById(id: string): Promise<Scenario | null> {
-  await delay(80);
+  await delay(800);
   return MOCK_SCENARIOS.find((s) => s.id === id) || null;
 }
 
-export async function getScenariosByFilters(filters: {
-  skills?: string[];
-  difficulty?: string[];
-  showOnlyUnfinished?: boolean;
-  searchQuery?: string;
-}): Promise<Scenario[]> {
-  await delay(120);
+export async function getScenariosByFilters(
+  filters: ScenarioFilters,
+): Promise<Scenario[]> {
+  await delay(1200);
 
   let filtered = [...MOCK_SCENARIOS];
 
@@ -256,15 +253,15 @@ export async function getScenariosByFilters(filters: {
     filtered = filtered.filter((s) => !s.completed);
   }
 
-  if (filters.skills && filters.skills.length > 0) {
+  if (filters.skills.length > 0) {
     filtered = filtered.filter((s) =>
-      filters.skills!.some((skill) => s.skills.includes(skill as any)),
+      filters.skills.some((skill) => s.skills.includes(skill)),
     );
   }
 
-  if (filters.difficulty && filters.difficulty.length > 0) {
+  if (filters.difficulty.length > 0) {
     filtered = filtered.filter((s) =>
-      filters.difficulty!.includes(s.difficulty),
+      filters.difficulty.includes(s.difficulty),
     );
   }
 

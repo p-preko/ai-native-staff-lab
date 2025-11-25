@@ -1,44 +1,37 @@
 import { z } from 'zod';
-import { SkillTag, DifficultyLevel } from '@/types/scenario';
+import { SkillTag, DifficultyLevel, ScenarioFilters } from '@/types/scenario';
+import { ALL_SKILLS, ALL_DIFFICULTIES } from './constants';
 
 export const scenariosSearchParamsSchema = z.object({
   search: z.string().optional(),
   skills: z.string().optional(),
   difficulty: z.string().optional(),
   unfinished: z.enum(['true', 'false']).optional(),
-  details: z.string().optional(),
 });
 
 export type ScenariosSearchParams = z.infer<typeof scenariosSearchParamsSchema>;
 
-export function parseScenarioFilters(params: ScenariosSearchParams) {
+export function parseScenarioFilters(
+  params: ScenariosSearchParams,
+): ScenarioFilters {
+  const skills =
+    params.skills
+      ?.split(',')
+      .filter(Boolean)
+      .filter((s): s is SkillTag => ALL_SKILLS.includes(s as SkillTag)) ?? [];
+
+  const difficulty =
+    params.difficulty
+      ?.split(',')
+      .filter(Boolean)
+      .filter((d): d is DifficultyLevel =>
+        ALL_DIFFICULTIES.includes(d as DifficultyLevel),
+      ) ?? [];
+
   return {
     searchQuery: params.search?.trim() || '',
-    skills: params.skills
-      ? (params.skills.split(',').filter(Boolean) as SkillTag[])
-      : [],
-    difficulty: params.difficulty
-      ? (params.difficulty.split(',').filter(Boolean) as DifficultyLevel[])
-      : [],
+    skills,
+    difficulty,
     showOnlyUnfinished: params.unfinished === 'true',
   };
-}
-
-export function buildScenarioUrl(
-  currentParams: ScenariosSearchParams,
-  updates: Partial<ScenariosSearchParams>,
-): string {
-  const params = new URLSearchParams();
-
-  const merged = { ...currentParams, ...updates };
-
-  if (merged.search?.trim()) params.set('search', merged.search.trim());
-  if (merged.skills?.trim()) params.set('skills', merged.skills.trim());
-  if (merged.difficulty?.trim())
-    params.set('difficulty', merged.difficulty.trim());
-  if (merged.unfinished === 'true') params.set('unfinished', 'true');
-  if (merged.details) params.set('details', merged.details);
-
-  const queryString = params.toString();
-  return `/scenarios${queryString ? `?${queryString}` : ''}`;
 }

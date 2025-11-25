@@ -1,8 +1,7 @@
 import { ScenariosPage } from '@/features/scenarios';
-import { type ScenariosSearchParams } from '@/features/scenarios/lib/validation';
 
 interface PageProps {
-  searchParams: Promise<ScenariosSearchParams>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default function Scenarios({ searchParams }: PageProps) {
