@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Input } from '@/components/ui/input';
 import { Search, Plus, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -39,18 +39,39 @@ export function WorkspaceHeader({
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b pb-6">
         <div className="flex items-center gap-2">
-          <Tabs
+          <ToggleGroup
+            type="single"
             value={activeTab}
-            onValueChange={handleTabChange}
-            className="w-full sm:w-auto"
+            onValueChange={(value) => {
+              if (value) handleTabChange(value);
+            }}
+            className="bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]"
           >
-            <TabsList>
-              <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="completed">Completed</TabsTrigger>
-              <TabsTrigger value="archived">Archived</TabsTrigger>
-              <TabsTrigger value="all">All Projects</TabsTrigger>
-            </TabsList>
-          </Tabs>
+            <ToggleGroupItem
+              value="active"
+              className="h-[calc(100%-1px)] flex-1 px-3 py-1 text-sm font-medium transition-all data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm rounded-md hover:bg-background/50"
+            >
+              Active
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="completed"
+              className="h-[calc(100%-1px)] flex-1 px-3 py-1 text-sm font-medium transition-all data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm rounded-md hover:bg-background/50"
+            >
+              Completed
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="archived"
+              className="h-[calc(100%-1px)] flex-1 px-3 py-1 text-sm font-medium transition-all data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm rounded-md hover:bg-background/50"
+            >
+              Archived
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="all"
+              className="h-[calc(100%-1px)] flex-1 px-3 py-1 text-sm font-medium transition-all data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm rounded-md hover:bg-background/50"
+            >
+              All Projects
+            </ToggleGroupItem>
+          </ToggleGroup>
           {isTabPending && (
             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
           )}
