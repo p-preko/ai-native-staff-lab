@@ -4,6 +4,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/features/navigation';
 import { DashboardHeader } from '@/features/dashboard';
+import NextTopLoader from 'nextjs-toploader';
+import { cn } from '@/lib/utils';
 import './globals.css';
 
 const geistSans = Geist({
@@ -32,8 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(geistSans.variable, geistMono.variable, 'antialiased')}
       >
+        <NextTopLoader color="#10b981" showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

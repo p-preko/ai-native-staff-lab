@@ -1,8 +1,11 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import { Check, ArrowRight } from 'lucide-react';
 import { Story } from '@/types/project';
-import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { InteractiveItem } from '@/components/ui/interactive-item';
 
 interface StoryItemProps {
   story: Story;
@@ -10,12 +13,23 @@ interface StoryItemProps {
 
 export function StoryItem({ story }: StoryItemProps) {
   return (
-    <div className="flex items-center justify-between gap-4 py-4 first:pt-0 hover:bg-accent/50 transition-colors rounded-lg px-2 -mx-2">
+    <InteractiveItem
+      href={`/stories/${story.id}`}
+      className="flex items-center justify-between gap-4 py-4 first:pt-0 hover:bg-accent/50 transition-all rounded-lg px-2 -mx-2 cursor-pointer group outline-none"
+      asChild={false}
+    >
       <div className="flex-1 space-y-2">
-        <div className="font-semibold text-sm">{story.title}</div>
+        <div className="font-semibold text-sm group-hover:text-primary transition-colors">
+          {story.title}
+        </div>
         <div className="flex gap-2 items-center flex-wrap">
           {story.tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-xs">
+            <Badge
+              key={tag}
+              variant="outline"
+              className="text-xs pointer-events-none"
+              tabIndex={-1}
+            >
               {tag}
             </Badge>
           ))}
@@ -27,9 +41,15 @@ export function StoryItem({ story }: StoryItemProps) {
           )}
         </div>
       </div>
-      <Button variant="ghost" size="sm" className="shrink-0" asChild>
-        <Link href={`/stories/${story.id}`}>View</Link>
-      </Button>
-    </div>
+      <div
+        className={cn(
+          buttonVariants({ variant: 'ghost', size: 'sm' }),
+          'shrink-0 pointer-events-none',
+        )}
+      >
+        View
+        <ArrowRight className="ml-2 h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+      </div>
+    </InteractiveItem>
   );
 }

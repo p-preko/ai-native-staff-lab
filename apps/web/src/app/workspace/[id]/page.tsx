@@ -1,12 +1,22 @@
-export default function WorkspaceProjectPage({
+import { notFound } from 'next/navigation';
+import { getWorkspaceProjectById } from '@/features/workspace/lib/mock-data';
+import { WorkspaceEditor } from '@/features/workspace/components/workspace-editor';
+
+interface WorkspaceIdPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function WorkspaceIdPage({
   params,
-}: {
-  params: { id: string };
-}) {
-  return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold">Workspace: Project {params.id}</h1>
-      <p className="text-muted-foreground mt-4">Coming soon...</p>
-    </div>
-  );
+}: WorkspaceIdPageProps) {
+  const { id } = await params;
+  const project = await getWorkspaceProjectById(id);
+
+  if (!project) {
+    notFound();
+  }
+
+  return <WorkspaceEditor project={project} />;
 }

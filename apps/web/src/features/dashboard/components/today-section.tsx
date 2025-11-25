@@ -1,7 +1,7 @@
 import { ProjectCard } from './project-card';
 import { Badge } from '@/components/ui/badge';
-import { OpenWorkspaceButton } from './open-workspace-button';
 import { Project } from '@/types/project';
+import { FadeIn } from '@/components/ui/fade-in';
 
 interface TodaySectionProps {
   activeProjects: Project[];
@@ -17,19 +17,13 @@ export function TodaySection({
       <h2 className="text-3xl font-bold tracking-tight">TODAY</h2>
 
       <div className="space-y-5">
-        {activeProjects.map((project) => (
-          <div key={project.id} className="space-y-3">
+        {activeProjects.map((project, index) => (
+          <FadeIn key={project.id} delay={index * 100} className="space-y-3">
             <ProjectCard project={project} variant="active" />
-            {project.status === 'in-progress' && (
-              <OpenWorkspaceButton
-                projectId={project.id}
-                projectName={project.name}
-              />
-            )}
-          </div>
+          </FadeIn>
         ))}
 
-        <div className="pt-4 space-y-4 border-t">
+        <FadeIn delay={200} className="pt-4 space-y-4 border-t">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
             Today&apos;s focus
           </h3>
@@ -44,7 +38,7 @@ export function TodaySection({
               </Badge>
             ))}
           </div>
-        </div>
+        </FadeIn>
       </div>
     </div>
   );
