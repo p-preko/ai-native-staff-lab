@@ -1,5 +1,4 @@
 import { Badge } from '@/components/ui/badge';
-import { Label } from '@/components/ui/label';
 import { SkillTag, DifficultyLevel } from '@/types/scenario';
 import Link from 'next/link';
 import { createFilterViewModel } from '../lib/view-models';
@@ -64,7 +63,8 @@ export function ScenarioFilters({
         <Link
           href={unfinished.href}
           scroll={false}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-2 group"
+          role="button"
           aria-pressed={unfinished.active}
           aria-label={
             unfinished.active
@@ -83,7 +83,9 @@ export function ScenarioFilters({
               } translate-y-0.5`}
             />
           </div>
-          <Label className="text-sm cursor-pointer">Show only unfinished</Label>
+          <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+            Show only unfinished
+          </span>
         </Link>
       </div>
     </div>

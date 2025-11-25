@@ -233,19 +233,19 @@ const MOCK_SCENARIOS: Scenario[] = [
 ];
 
 export async function getScenarios(): Promise<Scenario[]> {
-  await delay(1500);
+  await delay(150);
   return MOCK_SCENARIOS;
 }
 
 export async function getScenarioById(id: string): Promise<Scenario | null> {
-  await delay(800);
+  await delay(80);
   return MOCK_SCENARIOS.find((s) => s.id === id) || null;
 }
 
 export async function getScenariosByFilters(
   filters: ScenarioFilters,
 ): Promise<Scenario[]> {
-  await delay(1200);
+  await delay(120);
 
   let filtered = [...MOCK_SCENARIOS];
 
